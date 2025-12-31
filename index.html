@@ -136,28 +136,42 @@ button{
 @keyframes fall{
   to{transform:translateY(110vh);}
 }
-  #finalYear{
+#finalYear{
   position:fixed;
   inset:0;
   display:none;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  text-align:center;
+
   font-family:'Pacifico',cursive;
   font-size:64px;
   color:white;
-  background:rgba(0,0,0,0.65);
+
+  background:rgba(0,0,0,0.75);
+
   text-shadow:
     0 0 20px gold,
     0 0 40px gold,
     0 0 80px gold;
+
   z-index:10;
   animation:boom 2s ease-in-out infinite;
 }
 
 @keyframes boom{
-  0%{transform:scale(0.8);opacity:0.6;}
-  50%{transform:scale(1.1);opacity:1;}
-  100%{transform:scale(1);opacity:0.9;}
+  0%{
+    transform:scale(0.85);
+    opacity:0.7;
+  }
+  50%{
+    transform:scale(1.1);
+    opacity:1;
+  }
+  100%{
+    transform:scale(1);
+    opacity:0.9;
+  }
 }
   .fade-out{
   animation: fadeAway 2s forwards;
