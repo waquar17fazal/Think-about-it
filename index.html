@@ -19,8 +19,8 @@ body{
   position:fixed;
   inset:0;
   background:url("p1.jpg") center/cover no-repeat;
-  z-index:-3;
   transition:opacity 1s ease-in-out;
+  z-index:-3;
 }
 
 /* DARK OVERLAY */
@@ -31,8 +31,17 @@ body{
   z-index:-2;
 }
 
+/* FIREWORKS CANVAS */
+#fireworks{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+}
+
 /* CENTER CONTENT */
 #content{
+  position:relative;
   height:100vh;
   display:flex;
   flex-direction:column;
@@ -45,8 +54,9 @@ body{
 }
 
 #type{
-  font-size:26px;
+  font-size:22px;
   max-width:900px;
+  line-height:1.6;
 }
 
 #countdown{
@@ -74,20 +84,14 @@ button{
 /* HEART + PANDA RAIN */
 .emoji{
   position:fixed;
-  top:-30px;
-  font-size:24px;
-  animation:fall 6s linear infinite;
+  top:-40px;
+  font-size:26px;
+  animation:fall linear forwards;
   z-index:0;
 }
 
 @keyframes fall{
   to{transform:translateY(110vh);}
-}
-  #fireworks{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
 }
 </style>
 </head>
@@ -105,6 +109,7 @@ if(pass !== "appupanda"){
 <div id="bg"></div>
 <div id="overlay"></div>
 <canvas id="fireworks"></canvas>
+
 <div id="content">
   <h1 id="type"></h1>
   <h2 id="countdown"></h2>
@@ -112,10 +117,8 @@ if(pass !== "appupanda"){
   <button onclick="reveal()">Tap for one last surprise 🐼❤️</button>
 
   <p id="secret">
-    Appu, my panda 🐼❤️<br><br>
-    No matter where life takes us, I promise to stand beside you,
-    hold your hand, and love you a little more every single day.<br><br>
-    Happy New Year, my forever. 💫
+    Thanks for choosing me Appu 🐼❤️ <br>
+    I promise to love you more every single day.
   </p>
 </div>
 
@@ -125,13 +128,13 @@ if(pass !== "appupanda"){
 
 <script>
 /* TYPEWRITER MESSAGE */
-let text = "Happy new year APPU🐼 My love .Thank you for coming in my life. You have changed my life completely. I know mai utna accha bf nhi ban paya i know mai tujhe bht hurt kiya hu pichle kuch dino mein but inn sab wajhon se mai bhi tuta hu kahi na kahi. 2025 ne mujhe bht kuch diya hai i think sab kuch diya hai yahi woh saal hai jis saal mai tujhse mila . 2025 will be one of my best year. It holds a lot of memories from being unknown to best friends to LOVE. Tune mere liye bht kuch saha hai and i will never forget this. We are going to start a new year together with more love more happiness. In this new year i will try my best to keep you happy always . I will love you more . I will try to change myself so that mai tujhe hurt na karr saku . Ek sab se bari cheez mai chnage karna chahunga ki mai gusse mein tere calls ignore krr deta hu but i promise mai yeh change krne ki koshish karunga. Lets start this year with a new love and we will make more memmories together . Thanks for choosing me . I love you My jaan . Once again Happiest new year and the best life ahead with me. ";
+let text = "Happy new year APPU 🐼 My love. Thank you for coming in my life. You have changed my life completely. I know mai utna accha bf nhi ban paya, i know mai tujhe bahut hurt kiya hu pichle kuch dino mein, but inn sab wajhon se mai bhi tuta hu kahi na kahi. 2025 ne mujhe bahut kuch diya hai, i think sab kuch diya hai. Yahi woh saal hai jis saal mai tujhse mila. 2025 will be one of my best year. It holds a lot of memories from being unknown to best friends to LOVE. Tune mere liye bahut kuch saha hai and i will never forget this. We are going to start a new year together with more love, more happiness. In this new year i will try my best to keep you happy always. I will love you more. I will try to change myself so that mai tujhe hurt na kar saku. Ek sabse badi cheez mai change karna chahunga ki mai gusse mein tere calls ignore kar deta hu but i promise mai yeh change karne ki koshish karunga. Lets start this year with a new love and we will make more memories together. Thanks for choosing me. I love you my jaan. Once again happiest new year and the best life ahead with me.";
 let i = 0;
 function typing(){
   if(i < text.length){
     document.getElementById("type").innerHTML += text.charAt(i);
     i++;
-    setTimeout(typing, 80);
+    setTimeout(typing, 40);
   }
 }
 typing();
@@ -141,63 +144,53 @@ let target = new Date("2026-01-01").getTime();
 setInterval(()=>{
   let now = new Date().getTime();
   let diff = target - now;
-
   let d = Math.floor(diff/(1000*60*60*24));
   let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
   let m = Math.floor((diff%(1000*60*60))/(1000*60));
   let s = Math.floor((diff%(1000*60))/1000);
-
   document.getElementById("countdown").innerHTML =
   d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
 },1000);
 
 /* BACKGROUND SLIDESHOW */
-let pics = [];
+let pics=[];
 for(let n=1;n<=30;n++){ pics.push("p"+n+".jpg"); }
 
-let idx = 0;
-let bg = document.getElementById("bg");
+let idx=0;
+let bg=document.getElementById("bg");
 
 setInterval(()=>{
-  bg.style.opacity = 0;
+  bg.style.opacity=0;
   setTimeout(()=>{
-    idx = (idx + 1) % pics.length;
-    bg.style.backgroundImage = "url('"+pics[idx]+"')";
-    bg.style.opacity = 1;
+    idx=(idx+1)%pics.length;
+    bg.style.backgroundImage="url('"+pics[idx]+"')";
+    bg.style.opacity=1;
   },1000);
 },4000);
 
 /* HEART + PANDA RAIN */
 setInterval(()=>{
-  let e = document.createElement("div");
-  e.className = "emoji";
-  e.innerHTML = Math.random() > 0.5 ? "❤️" : "🐼" : "💗" : 💕 ";
-  e.style.left = Math.random()*100 + "vw";
-  e.style.animationDuration = (4 + Math.random()*3) + "s";
+  let e=document.createElement("div");
+  e.className="emoji";
+  e.innerHTML=Math.random()>0.5?"❤️":"🐼";
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=(4+Math.random()*3)+"s";
   document.body.appendChild(e);
   setTimeout(()=>e.remove(),7000);
 },300);
 
-/* FINAL SURPRISE */
-function reveal(){
-  document.getElementById("secret").style.display = "block";
-}
-  /* FIREWORKS */
+/* FIREWORKS */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
-let sparks = [];
-
-function launchFirework(){
-  let x = Math.random() * canvas.width;
-  let y = Math.random() * canvas.height * 0.5;
-
+let sparks=[];
+function fire(){
+  let x=Math.random()*canvas.width;
+  let y=Math.random()*canvas.height*0.5;
   for(let i=0;i<40;i++){
     sparks.push({
-      x:x,
-      y:y,
+      x:x,y:y,
       dx:(Math.random()-0.5)*6,
       dy:(Math.random()-0.5)*6,
       life:60,
@@ -205,28 +198,23 @@ function launchFirework(){
     });
   }
 }
-
-function animateFireworks(){
+function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-
   sparks.forEach((p,i)=>{
-    p.x += p.dx;
-    p.y += p.dy;
-    p.life--;
-
-    ctx.fillStyle = p.color;
+    p.x+=p.dx; p.y+=p.dy; p.life--;
+    ctx.fillStyle=p.color;
     ctx.fillRect(p.x,p.y,2,2);
-
-    if(p.life<=0){
-      sparks.splice(i,1);
-    }
+    if(p.life<=0) sparks.splice(i,1);
   });
-
-  requestAnimationFrame(animateFireworks);
+  requestAnimationFrame(animate);
 }
+setInterval(fire,1200);
+animate();
 
-setInterval(launchFirework,1200);
-animateFireworks();
+/* FINAL SURPRISE */
+function reveal(){
+  document.getElementById("secret").style.display="block";
+}
 </script>
 
 </body>
