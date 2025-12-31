@@ -188,6 +188,27 @@ setInterval(()=>{
 function reveal(){
   document.getElementById("secret").style.display="block";
 }
+<script>
+  // typewriter code
+  // countdown code
+  // reveal function
+
+  // 🔽 BACKGROUND SLIDESHOW CODE (PASTE HERE)
+  let pics = [];
+  for(let n=1;n<=30;n++){ pics.push("p"+n+".jpg"); }
+
+  let idx = 0;
+  let bg = document.getElementById("bg");
+
+  setInterval(()=>{
+    bg.style.opacity = 0;
+    setTimeout(()=>{
+      idx = (idx + 1) % pics.length;
+      bg.style.backgroundImage = "url('"+pics[idx]+"')";
+      bg.style.opacity = 1;
+    },1000);
+  },4000);
+</script>
 </script>
 
 </body>
