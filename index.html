@@ -136,6 +136,46 @@ button{
 @keyframes fall{
   to{transform:translateY(110vh);}
 }
+  #finalYear{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  font-family:'Pacifico',cursive;
+  font-size:64px;
+  color:white;
+  background:rgba(0,0,0,0.65);
+  text-shadow:
+    0 0 20px gold,
+    0 0 40px gold,
+    0 0 80px gold;
+  z-index:10;
+  animation:boom 2s ease-in-out infinite;
+}
+
+@keyframes boom{
+  0%{transform:scale(0.8);opacity:0.6;}
+  50%{transform:scale(1.1);opacity:1;}
+  100%{transform:scale(1);opacity:0.9;}
+}
+  .fade-out{
+  animation: fadeAway 2s forwards;
+}
+
+@keyframes fadeAway{
+  to{
+    opacity:0;
+    transform:scale(0.95);
+  }
+}
+ .gold-bg{
+  background: radial-gradient(circle, #2b2b2b, #000);
+}
+
+.gold-glow{
+  box-shadow: 0 0 40px gold;
+} 
 </style>
 </head>
 
@@ -154,6 +194,7 @@ if(pass !== "waquar💗panda"){
 <canvas id="fireworks"></canvas>
 
 <div id="newyear">
+  <div id="finalYear">HAPPY NEW YEAR 2026 🎆</div>
   <span class="big-emoji left">🐼</span>
   HAPPY NEW YEAR APPU
   <span class="big-emoji right">❤️</span>
@@ -174,7 +215,9 @@ if(pass !== "waquar💗panda"){
 <audio autoplay loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
-
+<audio id="tick">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3" type="audio/mpeg">
+</audio>
 <script>
 /* YOUR PERSONAL NOTE (TYPEWRITER) */
 let text = `Happy New Year Appu 🐼  
@@ -227,14 +270,47 @@ function typing(){
 typing();
 
 /* Countdown */
-let target=new Date("2026-01-01").getTime();
-setInterval(()=>{
-  let now=new Date().getTime();
-  let diff=target-now;
-  let d=Math.floor(diff/(1000*60*60*24));
-  let h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  let m=Math.floor((diff%(1000*60*60))/(1000*60));
-  let s=Math.floor((diff%(1000*60))/1000);
+let target = new Date("January 1, 2026 00:00:00").getTime();
+let countdownTimer = setInterval(()=>{
+  let now = new Date().getTime();
+  let diff = target - now;
+
+if(diff <= 0){
+  clearInterval(countdownTimer);
+
+  // Fade old content
+  document.getElementById("content").classList.add("fade-out");
+  document.getElementById("newyear").classList.add("fade-out");
+
+  // Change background to gold-black
+  document.getElementById("overlay").classList.add("gold-bg");
+
+  // Show BIG 2026 screen
+  let fy = document.getElementById("finalYear");
+  fy.style.display = "flex";
+  fy.classList.add("gold-glow");
+
+  // Massive fireworks blast
+  for(let i=0;i<10;i++){
+    setTimeout(fire, i*250);
+  }
+
+  // Device vibration (mobile)
+  if(navigator.vibrate){
+    navigator.vibrate([300,200,300,200,600]);
+  }
+
+  return;
+}
+
+  let d = Math.floor(diff/(1000*60*60*24));
+  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((diff%(1000*60*60))/(1000*60));
+  let s = Math.floor((diff%(1000*60))/1000);
+  if(d===0 && h===0 && m===0 && s<=3 && s>0){
+  document.getElementById("tick").play();
+}
+
   document.getElementById("countdown").innerHTML =
     d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
 },1000);
