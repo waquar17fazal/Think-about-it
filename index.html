@@ -5,37 +5,35 @@
 <title>For Appu 🐼❤️</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
   margin:0;
-  min-height:100vh;
-  font-family: Arial, sans-serif;
+  height:100vh;
   overflow:hidden;
+  font-family: Arial, sans-serif;
 }
 
-/* Background slideshow */
+/* BACKGROUND SLIDESHOW */
 #bg{
   position:fixed;
   inset:0;
   background:url("p1.jpg") center/cover no-repeat;
-  z-index:-2;
+  z-index:-3;
   transition:opacity 1s ease-in-out;
 }
 
-/* Dark overlay */
+/* DARK OVERLAY */
 #overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.45);
-  z-index:-1;
+  z-index:-2;
 }
 
-/* Centered content */
+/* CENTER CONTENT */
 #content{
-  min-height:100vh;
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -43,6 +41,7 @@ body{
   text-align:center;
   color:white;
   padding:20px;
+  z-index:1;
 }
 
 #type{
@@ -56,7 +55,7 @@ body{
 }
 
 button{
-  margin-top:22px;
+  margin-top:20px;
   padding:12px 24px;
   font-size:18px;
   border:none;
@@ -67,9 +66,22 @@ button{
 
 #secret{
   display:none;
-  margin-top:22px;
+  margin-top:20px;
   font-size:20px;
   max-width:800px;
+}
+
+/* HEART + PANDA RAIN */
+.emoji{
+  position:fixed;
+  top:-30px;
+  font-size:24px;
+  animation:fall 6s linear infinite;
+  z-index:0;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh);}
 }
 </style>
 </head>
@@ -106,7 +118,7 @@ if(pass !== "appupanda"){
 </audio>
 
 <script>
-/* TYPEWRITER */
+/* TYPEWRITER MESSAGE */
 let text = "Happy New Year, Aparna ❤️ My Appu, my little panda 🐼. I choose you, this year and every year after. ❤️";
 let i = 0;
 function typing(){
@@ -130,14 +142,12 @@ setInterval(()=>{
   let s = Math.floor((diff%(1000*60))/1000);
 
   document.getElementById("countdown").innerHTML =
-    d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
+  d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
 },1000);
 
-/* BACKGROUND SLIDESHOW (p1.jpg → p30.jpg) */
+/* BACKGROUND SLIDESHOW */
 let pics = [];
-for(let n=1;n<=30;n++){
-  pics.push("p"+n+".jpg");
-}
+for(let n=1;n<=30;n++){ pics.push("p"+n+".jpg"); }
 
 let idx = 0;
 let bg = document.getElementById("bg");
@@ -151,9 +161,20 @@ setInterval(()=>{
   },1000);
 },4000);
 
+/* HEART + PANDA RAIN */
+setInterval(()=>{
+  let e = document.createElement("div");
+  e.className = "emoji";
+  e.innerHTML = Math.random() > 0.5 ? "❤️" : "🐼";
+  e.style.left = Math.random()*100 + "vw";
+  e.style.animationDuration = (4 + Math.random()*3) + "s";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),7000);
+},300);
+
 /* FINAL SURPRISE */
 function reveal(){
-  document.getElementById("secret").style.display="block";
+  document.getElementById("secret").style.display = "block";
 }
 </script>
 
