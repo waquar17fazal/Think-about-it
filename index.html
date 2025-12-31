@@ -48,21 +48,37 @@ body{
   left:50%;
   transform:translateX(-50%);
   font-family:'Pacifico',cursive;
-  font-size:48px;
+  font-size:46px;
   color:white;
+  text-align:center;
   text-shadow:
     0 0 10px #ff4da6,
-    0 0 20px #ff4da6,
-    0 0 40px #ff4da6,
-    0 0 80px #ff4da6;
+    0 0 25px #ff4da6,
+    0 0 60px #ff4da6;
   animation:glow 3s ease-in-out infinite;
   z-index:3;
+  padding:10px 60px;
+}
+
+.big-emoji{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:42px;
+}
+
+.big-emoji.left{
+  left:-50px;
+}
+
+.big-emoji.right{
+  right:-50px;
 }
 
 @keyframes glow{
-  0%{transform:translateX(-50%) scale(1);opacity:0.85;}
-  50%{transform:translateX(-50%) scale(1.15);opacity:1;}
-  100%{transform:translateX(-50%) scale(1);opacity:0.85;}
+  0%{opacity:0.85; transform:translateX(-50%) scale(1);}
+  50%{opacity:1; transform:translateX(-50%) scale(1.1);}
+  100%{opacity:0.85; transform:translateX(-50%) scale(1);}
 }
 
 /* Center content */
@@ -81,8 +97,9 @@ body{
 
 #type{
   font-size:20px;
-  max-width:900px;
-  line-height:1.6;
+  max-width:820px;
+  line-height:1.9;
+  letter-spacing:0.5px;
 }
 
 #countdown{
@@ -136,7 +153,11 @@ if(pass !== "appupanda"){
 <div id="overlay"></div>
 <canvas id="fireworks"></canvas>
 
-<div id="newyear">HAPPY NEW YEAR APPU 🐼❤️</div>
+<div id="newyear">
+  <span class="big-emoji left">🐼</span>
+  HAPPY NEW YEAR APPU
+  <span class="big-emoji right">❤️</span>
+</div>
 
 <div id="content">
   <div id="type"></div>
@@ -156,48 +177,43 @@ if(pass !== "appupanda"){
 
 <script>
 /* YOUR PERSONAL NOTE (TYPEWRITER) */
-let text = `Happy new year APPU 🐼 My love.
-Thank you for coming in my life.
+let text = `Happy New Year Appu 🐼  
+My Love,
+
+Thank you for coming into my life.  
 You have changed my life completely.
 
-I know mai utna accha bf nhi ban paya,
-i know mai tujhe bht hurt kiya hu pichle kuch dino mein,
-but inn sab wajhon se mai bhi tuta hu kahi na kahi.
+I know I couldn’t be the best boyfriend,  
+and I know I hurt you in the past few days.  
+Somewhere, I was broken too.
 
-2025 ne mujhe bht kuch diya hai,
-i think sab kuch diya hai.
-Yahi woh saal hai jis saal mai tujhse mila.
+2025 gave me everything —  
+because this is the year I found YOU.  
+From strangers, to best friends, to love.
 
-2025 will be one of my best year.
-It holds a lot of memories from being unknown
-to best friends to LOVE.
+You have endured so much for me,  
+and I will never forget that.
 
-Tune mere liye bht kuch saha hai
-and i will never forget this.
+We are starting a new year together —  
+with more love, more happiness, and more understanding.
 
-We are going to start a new year together
-with more love, more happiness.
+This year, I promise to try harder,  
+to love you better,  
+and to never hurt you knowingly.
 
-In this new year i will try my best
-to keep you happy always.
-I will love you more.
+I want to change the habit  
+of ignoring your calls when I’m angry —  
+I promise I will work on this.
 
-I will try to change myself
-so that mai tujhe hurt na karr saku.
+Let’s begin this year with new love  
+and create countless memories together.
 
-Ek sab se badi cheez mai change karna chahunga
-ki mai gusse mein tere calls ignore krr deta hu
-but i promise mai yeh change krne ki koshish karunga.
+Thank you for choosing me.  
+I love you, my jaan ❤️
 
-Lets start this year with a new love
-and we will make more memories together.
-
-Thanks for choosing me.
-I love you my jaan.
-
-Once again,
-Happiest New Year
-and the best life ahead with me.`;
+Once again,  
+Happiest New Year —  
+and a beautiful life ahead with me.`;
 
 let i=0;
 function typing(){
