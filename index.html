@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>For Love of my life my APPU 🐼</title>
-  <style>
-    body*{
+<meta charset="UTF-8">
+<title>For Appu 🐼❤️</title>
+
+<style>
+*{
   box-sizing:border-box;
 }
 
@@ -23,7 +25,7 @@ body{
   transition:opacity 1s ease-in-out;
 }
 
-/* Dark overlay for readability */
+/* Dark overlay */
 #overlay{
   position:fixed;
   inset:0;
@@ -31,7 +33,7 @@ body{
   z-index:-1;
 }
 
-/* Center content safely */
+/* Centered content */
 #content{
   min-height:100vh;
   display:flex;
@@ -54,7 +56,7 @@ body{
 }
 
 button{
-  margin-top:20px;
+  margin-top:22px;
   padding:12px 24px;
   font-size:18px;
   border:none;
@@ -65,52 +67,13 @@ button{
 
 #secret{
   display:none;
-  margin-top:20px;
+  margin-top:22px;
   font-size:20px;
   max-width:800px;
 }
-  </style>
+</style>
 </head>
-<canvas id="fireworks"></canvas>
 
-<script>
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-function firework(){
-  let x = Math.random()*canvas.width;
-  let y = Math.random()*canvas.height/2;
-  for(let i=0;i<50;i++){
-    particles.push({
-      x:x,
-      y:y,
-      dx:(Math.random()-0.5)*4,
-      dy:(Math.random()-0.5)*4,
-      life:60
-    });
-  }
-}
-
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach((p,i)=>{
-    p.x+=p.dx;
-    p.y+=p.dy;
-    p.life--;
-    ctx.fillStyle="gold";
-    ctx.fillRect(p.x,p.y,2,2);
-    if(p.life<=0) particles.splice(i,1);
-  });
-  requestAnimationFrame(animate);
-}
-
-setInterval(firework,1200);
-animate();
-</script>
 <body>
 
 <script>
@@ -160,17 +123,21 @@ let target = new Date("2026-01-01").getTime();
 setInterval(()=>{
   let now = new Date().getTime();
   let diff = target - now;
+
   let d = Math.floor(diff/(1000*60*60*24));
   let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
   let m = Math.floor((diff%(1000*60*60))/(1000*60));
   let s = Math.floor((diff%(1000*60))/1000);
+
   document.getElementById("countdown").innerHTML =
-  d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
+    d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
 },1000);
 
-/* BACKGROUND SLIDESHOW */
+/* BACKGROUND SLIDESHOW (p1.jpg → p30.jpg) */
 let pics = [];
-for(let n=1;n<=30;n++){ pics.push("p"+n+".jpg"); }
+for(let n=1;n<=30;n++){
+  pics.push("p"+n+".jpg");
+}
 
 let idx = 0;
 let bg = document.getElementById("bg");
@@ -184,31 +151,10 @@ setInterval(()=>{
   },1000);
 },4000);
 
-/* FINAL MESSAGE */
+/* FINAL SURPRISE */
 function reveal(){
   document.getElementById("secret").style.display="block";
 }
-<script>
-  // typewriter code
-  // countdown code
-  // reveal function
-
-  // 🔽 BACKGROUND SLIDESHOW CODE (PASTE HERE)
-  let pics = [];
-  for(let n=1;n<=30;n++){ pics.push("p"+n+".jpg"); }
-
-  let idx = 0;
-  let bg = document.getElementById("bg");
-
-  setInterval(()=>{
-    bg.style.opacity = 0;
-    setTimeout(()=>{
-      idx = (idx + 1) % pics.length;
-      bg.style.backgroundImage = "url('"+pics[idx]+"')";
-      bg.style.opacity = 1;
-    },1000);
-  },4000);
-</script>
 </script>
 
 </body>
