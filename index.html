@@ -302,6 +302,10 @@ if(diff <= 0){
   // Show BIG 2026 screen
   let fy = document.getElementById("finalYear");
   fy.style.display = "flex";
+  // Hide Happy New Year screen after 10 seconds
+setTimeout(()=>{
+  document.getElementById("finalYear").style.display = "none";
+},10000);
   fy.classList.add("gold-glow");
 
   // Massive fireworks blast
