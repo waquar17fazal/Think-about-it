@@ -27,7 +27,46 @@
     }
   </style>
 </head>
+<canvas id="fireworks"></canvas>
 
+<script>
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function firework(){
+  let x = Math.random()*canvas.width;
+  let y = Math.random()*canvas.height/2;
+  for(let i=0;i<50;i++){
+    particles.push({
+      x:x,
+      y:y,
+      dx:(Math.random()-0.5)*4,
+      dy:(Math.random()-0.5)*4,
+      life:60
+    });
+  }
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    p.x+=p.dx;
+    p.y+=p.dy;
+    p.life--;
+    ctx.fillStyle="gold";
+    ctx.fillRect(p.x,p.y,2,2);
+    if(p.life<=0) particles.splice(i,1);
+  });
+  requestAnimationFrame(animate);
+}
+
+setInterval(firework,1200);
+animate();
+</script>
 <body>
 
 <script>
@@ -41,6 +80,23 @@ if(pass !== "waquar💕aparna"){
 <div>
   <h1 id="type"></h1>
   <h2 id="countdown"></h2>
+  <button onclick="reveal()" style="
+margin-top:30px;
+padding:12px 20px;
+font-size:18px;
+border:none;
+border-radius:20px;
+background:pink;
+color:black;">
+Tap for one last surprise 🐼❤️
+</button>
+
+<p id="secret" style="display:none;margin-top:20px;font-size:20px;">
+Appu, my panda 🐼❤️<br><br>
+No matter where life takes us, I promise to stand beside you,
+hold your hand, and love you a little more every single day.<br><br>
+Happy New Year, my forever. 💫
+</p>
 </div>
 
 <audio autoplay loop>
@@ -61,7 +117,8 @@ typing();
 
 setInterval(()=>{
   let heart=document.createElement("div");
-  heart.innerHTML="❤️";
+  let emojis = ["❤️","🐼"];
+heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
   heart.className="heart";
   heart.style.left=Math.random()*100+"vw";
   document.body.appendChild(heart);
@@ -79,6 +136,9 @@ setInterval(()=>{
   document.getElementById("countdown").innerHTML=
   d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds left ❤️";
 },1000);
+  function reveal(){
+  document.getElementById("secret").style.display = "block";
+}
 </script>
 
 </body>
