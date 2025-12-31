@@ -4,27 +4,50 @@
   <title>For Love of my life my APPU 🐼</title>
   <style>
     body{
-      margin:0;
-      height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:black;
-      color:white;
-      font-family:Arial;
-      text-align:center;
-      overflow:hidden;
-    }
-    .heart{
-      position:fixed;
-      color:red;
-      font-size:20px;
-      animation:float 5s linear infinite;
-    }
-    @keyframes float{
-      0%{bottom:0;opacity:1;}
-      100%{bottom:100%;opacity:0;}
-    }
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family: Arial, sans-serif;
+}
+
+#bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:url("p1.jpg") center/cover no-repeat;
+  z-index:-1;
+  transition:opacity 1s ease-in-out;
+}
+
+#content{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:white;
+  background:rgba(0,0,0,0.4);
+  padding:20px;
+}
+
+button{
+  margin-top:25px;
+  padding:12px 22px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  background:pink;
+  cursor:pointer;
+}
+
+#secret{
+  display:none;
+  margin-top:25px;
+  font-size:20px;
+}
   </style>
 </head>
 <canvas id="fireworks"></canvas>
@@ -92,39 +115,28 @@ animate();
 
 <script>
 let pass = prompt("Enter the secret password ❤️");
-if(pass !== "waquar💕aparna"){
+if(pass !== "appupanda"){
   alert("Wrong password 💔");
   window.location.href="https://google.com";
 }
 </script>
 
-<div>
+<!-- BACKGROUND SLIDESHOW -->
+<div id="bg"></div>
+
+<!-- CENTER CONTENT -->
+<div id="content">
   <h1 id="type"></h1>
   <h2 id="countdown"></h2>
-  <img id="slideshow" src="p1.jpg" width="260"
-style="
-border-radius:25px;
-margin-top:25px;
-box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-transition: opacity 1s ease-in-out;
-">
-  <button onclick="reveal()" style="
-margin-top:30px;
-padding:12px 20px;
-font-size:18px;
-border:none;
-border-radius:20px;
-background:pink;
-color:black;">
-Tap for one last surprise 🐼❤️
-</button>
 
-<p id="secret" style="display:none;margin-top:20px;font-size:20px;">
-Appu, my panda 🐼❤️<br><br>
-No matter where life takes us, I promise to stand beside you,
-hold your hand, and love you a little more every single day.<br><br>
-Happy New Year, my forever. 💫
-</p>
+  <button onclick="reveal()">Tap for one last surprise 🐼❤️</button>
+
+  <p id="secret">
+    Appu, my panda 🐼❤️<br><br>
+    No matter where life takes us, I promise to stand beside you,
+    hold your hand, and love you a little more every single day.<br><br>
+    Happy New Year, my forever. 💫
+  </p>
 </div>
 
 <audio autoplay loop>
@@ -132,39 +144,49 @@ Happy New Year, my forever. 💫
 </audio>
 
 <script>
-let text = "Happy new year APPU🐼 My love .Thank you for coming in my life. You have changed my life completely. I know mai utna accha bf nhi ban paya i know mai tujhe bht hurt kiya hu pichle kuch dino mein but inn sab wajhon se mai bhi tuta hu kahi na kahi. 2025 ne mujhe bht kuch diya hai i think sab kuch diya hai yahi woh saal hai jis saal mai tujhse mila . 2025 will be one of my best year. It holds a lot of memories from being unknown to best friends to LOVE. Tune mere liye bht kuch saha hai and i will never forget this. We are going to start a new year together with more love more happiness. In this new year i will try my best to keep you happy always . I will love you more . I will try to change myself so that mai tujhe hurt na karr saku . Ek sab se bari cheez mai chnage karna chahunga ki mai gusse mein tere calls ignore krr deta hu but i promise mai yeh change krne ki koshish karunga. Lets start this year with a new love and we will make more memmories together . Thanks for choosing me . I love you My jaan . Once again Happiest new year and the best life ahead with me. ";
-let i=0;
+/* TYPEWRITER */
+let text = "Happy New Year, Aparna ❤️ My Appu, my little panda 🐼. I choose you, this year and every year after. ❤️";
+let i = 0;
 function typing(){
-  if(i<text.length){
-    document.getElementById("type").innerHTML+=text.charAt(i);
+  if(i < text.length){
+    document.getElementById("type").innerHTML += text.charAt(i);
     i++;
-    setTimeout(typing,100);
+    setTimeout(typing, 80);
   }
 }
 typing();
 
+/* COUNTDOWN */
+let target = new Date("2026-01-01").getTime();
 setInterval(()=>{
-  let heart=document.createElement("div");
-  let emojis = ["❤️","🐼"];
-heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
-  heart.className="heart";
-  heart.style.left=Math.random()*100+"vw";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
-},300);
-
-let target=new Date("2026-01-01").getTime();
-setInterval(()=>{
-  let now=new Date().getTime();
-  let diff=target-now;
-  let d=Math.floor(diff/(1000*60*60*24));
-  let h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  let m=Math.floor((diff%(1000*60*60))/(1000*60));
-  let s=Math.floor((diff%(1000*60))/1000);
-  document.getElementById("countdown").innerHTML=
-  d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds left ❤️";
+  let now = new Date().getTime();
+  let diff = target - now;
+  let d = Math.floor(diff/(1000*60*60*24));
+  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((diff%(1000*60*60))/(1000*60));
+  let s = Math.floor((diff%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML =
+  d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
 },1000);
-  function reveal(){
+
+/* BACKGROUND SLIDESHOW */
+let pics = [];
+for(let n=1;n<=30;n++){ pics.push("p"+n+".jpg"); }
+
+let index = 0;
+let bg = document.getElementById("bg");
+
+setInterval(()=>{
+  bg.style.opacity = 0;
+  setTimeout(()=>{
+    index = (index+1)%pics.length;
+    bg.style.backgroundImage = "url('"+pics[index]+"')";
+    bg.style.opacity = 1;
+  },1000);
+},4000);
+
+/* FINAL SURPRISE */
+function reveal(){
   document.getElementById("secret").style.display = "block";
 }
 </script>
