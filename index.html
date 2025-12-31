@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>For Appu 🐼❤️</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
 *{box-sizing:border-box;}
 
@@ -14,32 +16,56 @@ body{
   font-family: Arial, sans-serif;
 }
 
-/* BACKGROUND SLIDESHOW */
+/* Background slideshow */
 #bg{
   position:fixed;
   inset:0;
   background:url("p1.jpg") center/cover no-repeat;
   transition:opacity 1s ease-in-out;
-  z-index:-3;
+  z-index:-4;
 }
 
-/* DARK OVERLAY */
+/* Dark overlay */
 #overlay{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,0.45);
-  z-index:-2;
+  z-index:-3;
 }
 
-/* FIREWORKS CANVAS */
+/* Fireworks */
 #fireworks{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:-1;
+  z-index:-2;
 }
 
-/* CENTER CONTENT */
+/* Animated New Year text */
+#newyear{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'Pacifico',cursive;
+  font-size:48px;
+  color:white;
+  text-shadow:
+    0 0 10px #ff4da6,
+    0 0 20px #ff4da6,
+    0 0 40px #ff4da6,
+    0 0 80px #ff4da6;
+  animation:glow 3s ease-in-out infinite;
+  z-index:3;
+}
+
+@keyframes glow{
+  0%{transform:translateX(-50%) scale(1);opacity:0.85;}
+  50%{transform:translateX(-50%) scale(1.15);opacity:1;}
+  100%{transform:translateX(-50%) scale(1);opacity:0.85;}
+}
+
+/* Center content */
 #content{
   position:relative;
   height:100vh;
@@ -54,7 +80,7 @@ body{
 }
 
 #type{
-  font-size:22px;
+  font-size:20px;
   max-width:900px;
   line-height:1.6;
 }
@@ -81,7 +107,7 @@ button{
   max-width:800px;
 }
 
-/* HEART + PANDA RAIN */
+/* Heart + Panda rain */
 .emoji{
   position:fixed;
   top:-40px;
@@ -110,15 +136,17 @@ if(pass !== "appupanda"){
 <div id="overlay"></div>
 <canvas id="fireworks"></canvas>
 
+<div id="newyear">HAPPY NEW YEAR APPU 🐼❤️</div>
+
 <div id="content">
-  <h1 id="type"></h1>
-  <h2 id="countdown"></h2>
+  <div id="type"></div>
+  <div id="countdown"></div>
 
   <button onclick="reveal()">Tap for one last surprise 🐼❤️</button>
 
   <p id="secret">
-    Thanks for choosing me Appu 🐼❤️ <br>
-    I promise to love you more every single day.
+    I love you my jaan ❤️  
+    Thank you for choosing me.
   </p>
 </div>
 
@@ -127,38 +155,79 @@ if(pass !== "appupanda"){
 </audio>
 
 <script>
-/* TYPEWRITER MESSAGE */
-let text = "Happy new year APPU 🐼 My love. Thank you for coming in my life. You have changed my life completely. I know mai utna accha bf nhi ban paya, i know mai tujhe bahut hurt kiya hu pichle kuch dino mein, but inn sab wajhon se mai bhi tuta hu kahi na kahi. 2025 ne mujhe bahut kuch diya hai, i think sab kuch diya hai. Yahi woh saal hai jis saal mai tujhse mila. 2025 will be one of my best year. It holds a lot of memories from being unknown to best friends to LOVE. Tune mere liye bahut kuch saha hai and i will never forget this. We are going to start a new year together with more love, more happiness. In this new year i will try my best to keep you happy always. I will love you more. I will try to change myself so that mai tujhe hurt na kar saku. Ek sabse badi cheez mai change karna chahunga ki mai gusse mein tere calls ignore kar deta hu but i promise mai yeh change karne ki koshish karunga. Lets start this year with a new love and we will make more memories together. Thanks for choosing me. I love you my jaan. Once again happiest new year and the best life ahead with me.";
-let i = 0;
+/* YOUR PERSONAL NOTE (TYPEWRITER) */
+let text = `Happy new year APPU 🐼 My love.
+Thank you for coming in my life.
+You have changed my life completely.
+
+I know mai utna accha bf nhi ban paya,
+i know mai tujhe bht hurt kiya hu pichle kuch dino mein,
+but inn sab wajhon se mai bhi tuta hu kahi na kahi.
+
+2025 ne mujhe bht kuch diya hai,
+i think sab kuch diya hai.
+Yahi woh saal hai jis saal mai tujhse mila.
+
+2025 will be one of my best year.
+It holds a lot of memories from being unknown
+to best friends to LOVE.
+
+Tune mere liye bht kuch saha hai
+and i will never forget this.
+
+We are going to start a new year together
+with more love, more happiness.
+
+In this new year i will try my best
+to keep you happy always.
+I will love you more.
+
+I will try to change myself
+so that mai tujhe hurt na karr saku.
+
+Ek sab se badi cheez mai change karna chahunga
+ki mai gusse mein tere calls ignore krr deta hu
+but i promise mai yeh change krne ki koshish karunga.
+
+Lets start this year with a new love
+and we will make more memories together.
+
+Thanks for choosing me.
+I love you my jaan.
+
+Once again,
+Happiest New Year
+and the best life ahead with me.`;
+
+let i=0;
 function typing(){
-  if(i < text.length){
-    document.getElementById("type").innerHTML += text.charAt(i);
+  if(i<text.length){
+    document.getElementById("type").innerHTML +=
+      text.charAt(i)==="\n" ? "<br>" : text.charAt(i);
     i++;
-    setTimeout(typing, 40);
+    setTimeout(typing,30);
   }
 }
 typing();
 
-/* COUNTDOWN */
-let target = new Date("2026-01-01").getTime();
+/* Countdown */
+let target=new Date("2026-01-01").getTime();
 setInterval(()=>{
-  let now = new Date().getTime();
-  let diff = target - now;
-  let d = Math.floor(diff/(1000*60*60*24));
-  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  let m = Math.floor((diff%(1000*60*60))/(1000*60));
-  let s = Math.floor((diff%(1000*60))/1000);
+  let now=new Date().getTime();
+  let diff=target-now;
+  let d=Math.floor(diff/(1000*60*60*24));
+  let h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m=Math.floor((diff%(1000*60*60))/(1000*60));
+  let s=Math.floor((diff%(1000*60))/1000);
   document.getElementById("countdown").innerHTML =
-  d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
+    d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
 },1000);
 
-/* BACKGROUND SLIDESHOW */
+/* Background slideshow */
 let pics=[];
-for(let n=1;n<=30;n++){ pics.push("p"+n+".jpg"); }
-
+for(let n=1;n<=30;n++){pics.push("p"+n+".jpg");}
 let idx=0;
 let bg=document.getElementById("bg");
-
 setInterval(()=>{
   bg.style.opacity=0;
   setTimeout(()=>{
@@ -168,7 +237,7 @@ setInterval(()=>{
   },1000);
 },4000);
 
-/* HEART + PANDA RAIN */
+/* Heart + Panda rain */
 setInterval(()=>{
   let e=document.createElement("div");
   e.className="emoji";
@@ -179,11 +248,11 @@ setInterval(()=>{
   setTimeout(()=>e.remove(),7000);
 },300);
 
-/* FIREWORKS */
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+/* Fireworks */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 let sparks=[];
 function fire(){
   let x=Math.random()*canvas.width;
@@ -201,17 +270,17 @@ function fire(){
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   sparks.forEach((p,i)=>{
-    p.x+=p.dx; p.y+=p.dy; p.life--;
+    p.x+=p.dx;p.y+=p.dy;p.life--;
     ctx.fillStyle=p.color;
     ctx.fillRect(p.x,p.y,2,2);
-    if(p.life<=0) sparks.splice(i,1);
+    if(p.life<=0)sparks.splice(i,1);
   });
   requestAnimationFrame(animate);
 }
 setInterval(fire,1200);
 animate();
 
-/* FINAL SURPRISE */
+/* Final surprise */
 function reveal(){
   document.getElementById("secret").style.display="block";
 }
