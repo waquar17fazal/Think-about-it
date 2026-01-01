@@ -230,8 +230,8 @@ if(pass !== "waquar💗panda"){
   <div id="type"></div>
   <div id="countdown"></div>
   <button id="playMusic">Play Music 🎵</button>
+<button id="enableVibe">Enable Vibration 📳</button>
 
-  <button onclick="reveal()">Tap for one last surprise 🐼❤️</button>
 
   <p id="secret">
     I love you my jaan ❤️  
@@ -417,6 +417,17 @@ animate();
 function reveal(){
   document.getElementById("secret").style.display="block";
 }
+let vibrationEnabled = false;
+
+document.getElementById("enableVibe").addEventListener("click", ()=>{
+  vibrationEnabled = true;
+
+  if(navigator.vibrate){
+    navigator.vibrate(100); // unlock vibration
+  }
+
+  document.getElementById("enableVibe").innerText = "Vibration Enabled ✅";
+});  
   document.getElementById("playMusic").addEventListener("click", ()=>{
   const music = document.getElementById("bgMusic");
   music.play();
