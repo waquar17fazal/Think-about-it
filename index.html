@@ -229,6 +229,7 @@ if(pass !== "waquar💗panda"){
 <div id="content">
   <div id="type"></div>
   <div id="countdown"></div>
+  <button id="playMusic">Play Music 🎵</button>
 
   <button onclick="reveal()">Tap for one last surprise 🐼❤️</button>
 
@@ -238,7 +239,7 @@ if(pass !== "waquar💗panda"){
   </p>
 </div>
 
-<audio autoplay loop>
+<audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 <audio id="tick">
@@ -416,6 +417,11 @@ animate();
 function reveal(){
   document.getElementById("secret").style.display="block";
 }
+  document.getElementById("playMusic").addEventListener("click", ()=>{
+  const music = document.getElementById("bgMusic");
+  music.play();
+  document.getElementById("playMusic").innerText = "Music Playing 🎶";
+});
 </script>
 
 </body>
