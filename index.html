@@ -22,10 +22,21 @@ body{
   inset:0;
   background:url("p1.jpg") center/cover no-repeat;
   transition:opacity 1s ease-in-out;
+  z-index:-5;
+}
+
+/* Background video */
+#bgVideo{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:none;
   z-index:-4;
 }
 
-/* Dark overlay */
+/* Overlay */
 #overlay{
   position:fixed;
   inset:0;
@@ -41,7 +52,7 @@ body{
   z-index:-2;
 }
 
-/* Animated New Year text */
+/* Top New Year text */
 #newyear{
   position:fixed;
   top:18px;
@@ -51,10 +62,7 @@ body{
   font-size:46px;
   color:white;
   text-align:center;
-  text-shadow:
-    0 0 10px #ff4da6,
-    0 0 25px #ff4da6,
-    0 0 60px #ff4da6;
+  text-shadow:0 0 10px #ff4da6,0 0 25px #ff4da6,0 0 60px #ff4da6;
   animation:glow 3s ease-in-out infinite;
   z-index:3;
   padding:10px 60px;
@@ -66,24 +74,17 @@ body{
   transform:translateY(-50%);
   font-size:42px;
 }
-
-.big-emoji.left{
-  left:-50px;
-}
-
-.big-emoji.right{
-  right:-50px;
-}
+.big-emoji.left{ left:-50px; }
+.big-emoji.right{ right:-50px; }
 
 @keyframes glow{
-  0%{opacity:0.85; transform:translateX(-50%) scale(1);}
+  0%{opacity:.85; transform:translateX(-50%) scale(1);}
   50%{opacity:1; transform:translateX(-50%) scale(1.1);}
-  100%{opacity:0.85; transform:translateX(-50%) scale(1);}
+  100%{opacity:.85; transform:translateX(-50%) scale(1);}
 }
 
 /* Center content */
 #content{
-  position:relative;
   height:100vh;
   display:flex;
   flex-direction:column;
@@ -99,7 +100,6 @@ body{
   font-size:20px;
   max-width:820px;
   line-height:1.9;
-  letter-spacing:0.5px;
 }
 
 #countdown{
@@ -108,7 +108,7 @@ body{
 }
 
 button{
-  margin-top:20px;
+  margin-top:15px;
   padding:12px 24px;
   font-size:18px;
   border:none;
@@ -117,14 +117,7 @@ button{
   cursor:pointer;
 }
 
-#secret{
-  display:none;
-  margin-top:20px;
-  font-size:20px;
-  max-width:800px;
-}
-
-/* Heart + Panda rain */
+/* Emoji rain */
 .emoji{
   position:fixed;
   top:-40px;
@@ -132,73 +125,41 @@ button{
   animation:fall linear forwards;
   z-index:0;
 }
-
 @keyframes fall{
   to{transform:translateY(110vh);}
 }
+
+/* Final year screen */
 #finalYear{
   position:fixed;
   inset:0;
   display:none;
   align-items:center;
   justify-content:center;
-  text-align:center;
-
   font-family:'Pacifico',cursive;
   font-size:64px;
   color:white;
-
   background:rgba(0,0,0,0.75);
-
-  text-shadow:
-    0 0 20px gold,
-    0 0 40px gold,
-    0 0 80px gold;
-
+  text-shadow:0 0 20px gold,0 0 40px gold,0 0 80px gold;
   z-index:10;
   animation:boom 2s ease-in-out infinite;
 }
-
 @keyframes boom{
-  0%{
-    transform:scale(0.85);
-    opacity:0.7;
-  }
-  50%{
-    transform:scale(1.1);
-    opacity:1;
-  }
-  100%{
-    transform:scale(1);
-    opacity:0.9;
-  }
-}
-  .fade-out{
-  animation: fadeAway 2s forwards;
+  0%{transform:scale(.85);opacity:.7;}
+  50%{transform:scale(1.1);opacity:1;}
+  100%{transform:scale(1);opacity:.9;}
 }
 
+.fade-out{
+  animation:fadeAway 2s forwards;
+}
 @keyframes fadeAway{
-  to{
-    opacity:0;
-    transform:scale(0.95);
-  }
-}
- .gold-bg{
-  background: radial-gradient(circle, #2b2b2b, #000);
+  to{opacity:0; transform:scale(.95);}
 }
 
-.gold-glow{
-  box-shadow: 0 0 40px gold;
-} 
-#bgVideo{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:none;
-  z-index:-4;
-} 
+.gold-bg{
+  background:radial-gradient(circle,#2b2b2b,#000);
+}
 </style>
 </head>
 
@@ -208,169 +169,135 @@ button{
 let pass = prompt("Enter the secret password ❤️");
 if(pass !== "waquar💗panda"){
   alert("Wrong password 💔 YOU ARE NOT MY APPU 😡");
-  window.location.href="https://google.com";
+  location.href="https://google.com";
 }
 </script>
 
 <div id="bg"></div>
-  <video id="bgVideo" muted loop playsinline>
+
+<video id="bgVideo" muted loop playsinline>
   <source src="blast.mp4" type="video/mp4">
 </video>
+
 <div id="overlay"></div>
 <canvas id="fireworks"></canvas>
 
 <div id="newyear">
-  <div id="finalYear">HAPPY NEW YEAR 2026 🎆</div>
   <span class="big-emoji left">🐼</span>
   HAPPY NEW YEAR APPU
   <span class="big-emoji right">❤️</span>
 </div>
 
+<div id="finalYear">HAPPY NEW YEAR 2026 🎆</div>
+
 <div id="content">
   <div id="type"></div>
   <div id="countdown"></div>
+
   <button id="playMusic">Play Music 🎵</button>
-<button id="enableVibe">Enable Vibration 📳</button>
-
-
-  <p id="secret">
-    I love you my jaan ❤️  
-    Thank you for choosing me.
-  </p>
+  <button id="enableVibe">Enable Vibration 📳</button>
 </div>
 
 <audio id="bgMusic" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
+
 <audio id="tick">
   <source src="https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3" type="audio/mpeg">
 </audio>
+
 <script>
-/* YOUR PERSONAL NOTE (TYPEWRITER) */
-let text = `Happy New Year Appu 🐼  
-My Love,
+/* TYPEWRITER */
+let text = `Happy New Year Appu 🐼
 
-Thank you for coming into my life.  
-You have changed my life completely.
+Thank you for coming into my life.
+You changed me completely.
 
-I know I couldn’t be the best boyfriend,  
-and I know I hurt you in the past few days.  
-Somewhere, I was broken too.
+From strangers to best friends to love —
+2025 gave me YOU.
 
-2025 gave me everything —  
-because this is the year I found YOU.  
-From strangers, to best friends, to love.
+I promise to love you better,
+understand you deeper,
+and never hurt you knowingly.
 
-You have endured so much for me,  
-and I will never forget that.
+Let’s start this year together,
+with new love and new memories.
 
-We are starting a new year together —  
-with more love, more happiness, and more understanding.
-
-This year, I promise to try harder,  
-to love you better,  
-and to never hurt you knowingly.
-
-I want to change the habit  
-of ignoring your calls when I’m angry —  
-I promise I will work on this.
-
-Let’s begin this year with new love  
-and create countless memories together.
-
-Thank you for choosing me.  
-I love you, my jaan ❤️
-
-Once again,  
-Happiest New Year —  
-and a beautiful life ahead with me.`;
+I love you, my jaan ❤️`;
 
 let i=0;
-function typing(){
+(function typing(){
   if(i<text.length){
     document.getElementById("type").innerHTML +=
-      text.charAt(i)==="\n" ? "<br>" : text.charAt(i);
-    i++;
-    setTimeout(typing,120);
+      text.charAt(i)==="\n"?"<br>":text.charAt(i);
+    i++; setTimeout(typing,120);
   }
-}
-typing();
+})();
 
-/* Countdown */
-let target = new Date("January 2, 2026 00:00:00").getTime();
-let countdownTimer = setInterval(()=>{
-  let now = new Date().getTime();
-  let diff = target - now;
+/* MUSIC */
+document.getElementById("playMusic").onclick=()=>{
+  bgMusic.play();
+  playMusic.innerText="Music Playing 🎶";
+};
 
-if(diff <= 0){
-  clearInterval(countdownTimer);
-  // Stop photo slideshow
-clearInterval(slideshowTimer);
+/* VIBRATION */
+let vibrationEnabled=false;
+enableVibe.onclick=()=>{
+  vibrationEnabled=true;
+  if(navigator.vibrate) navigator.vibrate(100);
+  enableVibe.innerText="Vibration Enabled ✅";
+};
 
-// Hide photo background
-document.getElementById("bg").style.display = "none";
+/* COUNTDOWN */
+let target=new Date("January 1, 2026 00:00:00").getTime();
+let countdownTimer=setInterval(()=>{
+  let diff=target-Date.now();
+  if(diff<=0){
+    clearInterval(countdownTimer);
+    clearInterval(slideshowTimer);
 
-// Show & play video
-let video = document.getElementById("bgVideo");
-video.style.display = "block";
-video.play();
+    bg.style.display="none";
+    bgVideo.style.display="block";
+    bgVideo.play();
 
-  // Fade old content
-  document.getElementById("content").classList.add("fade-out");
-  document.getElementById("newyear").classList.add("fade-out");
+    content.classList.add("fade-out");
+    newyear.classList.add("fade-out");
+    overlay.classList.add("gold-bg");
 
-  // Change background to gold-black
-  document.getElementById("overlay").classList.add("gold-bg");
+    finalYear.style.display="flex";
+    setTimeout(()=>finalYear.style.display="none",10000);
 
-  // Show BIG 2026 screen
-  let fy = document.getElementById("finalYear");
-  fy.style.display = "flex";
-  // Hide Happy New Year screen after 10 seconds
-setTimeout(()=>{
-  document.getElementById("finalYear").style.display = "none";
-},10000);
-  fy.classList.add("gold-glow");
+    for(let i=0;i<10;i++) setTimeout(fire,i*250);
 
-  // Massive fireworks blast
-  for(let i=0;i<10;i++){
-    setTimeout(fire, i*250);
-  }
+    if(vibrationEnabled && navigator.vibrate)
+      navigator.vibrate([300,200,300,200,600]);
 
-  // Device vibration (mobile)
-  if(navigator.vibrate){
-    navigator.vibrate([300,200,300,200,600]);
+    return;
   }
 
-  return;
-}
+  let d=Math.floor(diff/86400000);
+  let h=Math.floor(diff%86400000/3600000);
+  let m=Math.floor(diff%3600000/60000);
+  let s=Math.floor(diff%60000/1000);
 
-  let d = Math.floor(diff/(1000*60*60*24));
-  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  let m = Math.floor((diff%(1000*60*60))/(1000*60));
-  let s = Math.floor((diff%(1000*60))/1000);
-  if(d===0 && h===0 && m===0 && s<=3 && s>0){
-  document.getElementById("tick").play();
-}
+  if(d===0&&h===0&&m===0&&s<=3&&s>0) tick.play();
 
-  document.getElementById("countdown").innerHTML =
-    d+" Days "+h+" Hours "+m+" Minutes "+s+" Seconds ❤️";
+  countdown.innerHTML=`${d} Days ${h} Hours ${m} Minutes ${s} Seconds ❤️`;
 },1000);
 
-/* Background slideshow */
-let pics=[];
-for(let n=1;n<=30;n++){pics.push("p"+n+".jpg");}
+/* SLIDESHOW */
+let pics=[...Array(30)].map((_,i)=>`p${i+1}.jpg`);
 let idx=0;
-let bg=document.getElementById("bg");
-let slideshowTimer = setInterval(()=>{
-  bg.style.opacity = 0;
+let slideshowTimer=setInterval(()=>{
+  bg.style.opacity=0;
   setTimeout(()=>{
-    idx = (idx + 1) % pics.length;
-    bg.style.backgroundImage = "url('"+pics[idx]+"')";
-    bg.style.opacity = 1;
+    idx=(idx+1)%pics.length;
+    bg.style.backgroundImage=`url('${pics[idx]}')`;
+    bg.style.opacity=1;
   },1000);
 },4000);
 
-/* Heart + Panda rain */
+/* EMOJI RAIN */
 setInterval(()=>{
   let e=document.createElement("div");
   e.className="emoji";
@@ -381,58 +308,29 @@ setInterval(()=>{
   setTimeout(()=>e.remove(),7000);
 },300);
 
-/* Fireworks */
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+/* FIREWORKS */
+const ctx=fireworks.getContext("2d");
+fireworks.width=innerWidth;
+fireworks.height=innerHeight;
 let sparks=[];
 function fire(){
-  let x=Math.random()*canvas.width;
-  let y=Math.random()*canvas.height*0.5;
-  for(let i=0;i<40;i++){
-    sparks.push({
-      x:x,y:y,
-      dx:(Math.random()-0.5)*6,
-      dy:(Math.random()-0.5)*6,
-      life:60,
-      color:`hsl(${Math.random()*360},100%,60%)`
-    });
-  }
+  let x=Math.random()*fireworks.width;
+  let y=Math.random()*fireworks.height*0.5;
+  for(let i=0;i<40;i++)
+    sparks.push({x,y,dx:(Math.random()-.5)*6,dy:(Math.random()-.5)*6,life:60,
+      color:`hsl(${Math.random()*360},100%,60%)`});
 }
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+(function animate(){
+  ctx.clearRect(0,0,fireworks.width,fireworks.height);
   sparks.forEach((p,i)=>{
-    p.x+=p.dx;p.y+=p.dy;p.life--;
+    p.x+=p.dx; p.y+=p.dy; p.life--;
     ctx.fillStyle=p.color;
     ctx.fillRect(p.x,p.y,2,2);
-    if(p.life<=0)sparks.splice(i,1);
+    if(p.life<=0) sparks.splice(i,1);
   });
   requestAnimationFrame(animate);
-}
+})();
 setInterval(fire,1200);
-animate();
-
-/* Final surprise */
-function reveal(){
-  document.getElementById("secret").style.display="block";
-}
-let vibrationEnabled = false;
-
-document.getElementById("enableVibe").addEventListener("click", ()=>{
-  vibrationEnabled = true;
-
-  if(navigator.vibrate){
-    navigator.vibrate(100); // unlock vibration
-  }
-
-  document.getElementById("enableVibe").innerText = "Vibration Enabled ✅";
-});  
-  document.getElementById("playMusic").addEventListener("click", ()=>{
-  const music = document.getElementById("bgMusic");
-  music.play();
-  document.getElementById("playMusic").innerText = "Music Playing 🎶";
-});
 </script>
 
 </body>
